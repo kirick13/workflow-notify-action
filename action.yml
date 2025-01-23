@@ -3,7 +3,7 @@ description: 'Sends notification about action results to Telegram / Discord.'
 
 inputs:
   result:
-    description: 'Just pass here ${{ toJSON(needs) }}'
+    description: 'Just pass here "toJSON(needs)"'
     required: true
   # telegram-bot-token:
   #   description: 'Telegram: Bot token.'
