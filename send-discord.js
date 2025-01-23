@@ -5,10 +5,10 @@ const {
 	'INPUT_SIGNATURE': signature,
 } = process.env;
 
-if (
-	input?.length > 0
-	&& webhook?.length > 0
-) {
+// if (
+// 	input?.length > 0
+// 	&& webhook?.length > 0
+// ) {
 	const { repo_name, status, job_failed } = JSON.parse(input);
 
 	const COLORS = [
@@ -72,4 +72,4 @@ if (
 	// console.log(
 	// 	await response.text(),
 	// );
-}
+// }
