@@ -11,6 +11,7 @@ for (const [ job, { result }] of Object.entries(JSON.parse(process.env.INPUT_RES
 	}
 }
 
+let output = '';
 if (results.size > 0) {
 	// STATUS:
 	// 0 - Succeeded
@@ -32,11 +33,13 @@ if (results.size > 0) {
 		throw new Error('Unknown state found.');
 	}
 	
-	await appendFile(
-		process.env.GITHUB_OUTPUT,
-		'value=' + JSON.stringify({
-			status: 0,
-			job_failed,
-		}),
-	);
+	output = JSON.stringify({
+		status,
+		job_failed,
+	});
 }
+
+await appendFile(
+	process.env.GITHUB_OUTPUT,
+	`value=${output}`,
+);
