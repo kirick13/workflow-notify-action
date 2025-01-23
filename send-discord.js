@@ -1,11 +1,12 @@
 const {
 	'INPUT_DISCORD-WEBHOOK': webhook,
 	'INPUT_RESULT': input,
+	'INPUT_ICON': icon_url,
 	'INPUT_SIGNATURE': signature,
 } = process.env;
 
 if (
-	result?.length > 0
+	input?.length > 0
 	&& webhook?.length > 0
 ) {
 	const { repo_name, status, job_failed } = JSON.parse(input);
@@ -26,7 +27,7 @@ if (
 		title: TITLES[status],
 		author: {
 			name: repo_name,
-			icon_url: process.env.INPUT_LOGO,
+			icon_url,
 		},
 		timestamp: new Date().toISOString(),
 	};
