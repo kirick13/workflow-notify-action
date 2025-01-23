@@ -1,5 +1,7 @@
 import { appendFile } from 'node:fs/promises';
 
+console.log(process.env);
+
 // STATUS:
 // 0 - Succeeded
 // 1 - Failed
