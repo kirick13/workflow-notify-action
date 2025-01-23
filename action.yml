@@ -11,10 +11,10 @@ inputs:
     description: 'Signature of the author of the message (Discord only).'
   discord-webhook:
     description: 'Discord: Webhook URL.'
-  # telegram-bot-token:
-  #   description: 'Telegram: Bot token.'
-  # telegram-chat-id:
-  #   description: 'Telegram: Chat ID to send message to.'
+  telegram-bot-token:
+    description: 'Telegram: Bot token.'
+  telegram-chat-id:
+    description: 'Telegram: Chat ID to send message to.'
 
 runs:
   using: "composite"
@@ -29,18 +29,16 @@ runs:
       run: bun run $GITHUB_ACTION_PATH/parse.js
       id: data
 
-    # - name: Notify Telegram
-    #   shell: bash
-    #   run: bun run $GITHUB_ACTION_PATH/send-telegram.js
-    #   env:
-    #     DATA: ${{ steps.data.outputs.value }}
-    #     SIGNATURE: ${{ inputs.signature }}
-    #     TELEGRAM_CHAT_ID: ${{ inputs.telegram-chat-id }}
-    #     TELEGRAM_BOT_TOKEN: ${{ inputs.telegram-bot-token }}
-
     - name: Notify Discord
       if: ${{ steps.data.outputs.value != '' && inputs.discord-webhook != '' }}
       shell: bash
       run: bun run $GITHUB_ACTION_PATH/send-discord.js
+      env:
+        DATA: ${{ steps.data.outputs.value }}
+
+    - name: Notify Telegram
+      if: ${{ steps.data.outputs.value != '' && inputs.telegram-bot-token != '' && inputs.telegram-chat-id != '' }}
+      shell: bash
+      run: bun run $GITHUB_ACTION_PATH/send-telegram.js
       env:
         DATA: ${{ steps.data.outputs.value }}
