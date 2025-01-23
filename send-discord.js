@@ -1,13 +1,15 @@
-console.log(process.env);
-
-const webhook = process.env['INPUT_DISCORD-WEBHOOK'];
+const {
+	'INPUT_DISCORD-WEBHOOK': webhook,
+	'INPUT_RESULT': input,
+	'INPUT_SIGNATURE': signature,
+} = process.env;
 
 if (
-	process.env.DATA?.length > 0
+	result?.length > 0
 	&& webhook?.length > 0
 ) {
-	const { repo_name, status, job_failed } = JSON.parse(process.env.DATA);
-	
+	const { repo_name, status, job_failed } = JSON.parse(input);
+
 	const COLORS = [
 		0x16a34a, // succeeded
 		0xdc2626, // failed
@@ -28,28 +30,24 @@ if (
 		},
 		timestamp: new Date().toISOString(),
 	};
-	
-	// if (typeof process.env['INPUT_REPO-DESCRIPTION'] === 'string') {
-	// 	embed.description = process.env['INPUT_REPO-DESCRIPTION'];
-	// }
-	
-	// if (typeof process.env.SIGNATURE === 'string') {
-	// 	embed.footer = {
-	// 		text: process.env.SIGNATURE,
-	// 	};
-	// }
-	
+
+	if (typeofsignature === 'string') {
+		embed.footer = {
+			text: signature,
+		};
+	}
+
 	const body = {
 		embeds: [
 			embed,
 		],
 	};
-	
+
 	console.log(JSON.stringify(body, null, 4));
 	console.log();
-	
+
 	const response = await fetch(
-		process.env['INPUT_DISCORD-WEBHOOK'],
+		webhook,
 		{
 			method: 'POST',
 			headers: {
@@ -58,7 +56,7 @@ if (
 			body: JSON.stringify(body),
 		},
 	);
-	
+
 	console.log(
 		[ ...response.headers.entries() ]
 			.map(([ k, v ]) => k + ': ' + v)
