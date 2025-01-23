@@ -1,8 +1,7 @@
 import { appendFile } from 'node:fs/promises';
 
 const repo_url = new URL(process.env.GITHUB_REPOSITORY);
-console.log(repo_url);
-const repo_name = repo_url.pathname.replace(/\.git$/, '');
+const repo_name = repo_url.pathname.replace(/^\//, '').replace(/\.git$/, '');
 
 const results = new Set();
 let job_failed;
