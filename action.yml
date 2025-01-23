@@ -1,16 +1,20 @@
 name: 'kirick13/workflow-notify-action'
-description: 'Sends notification about action results to Telegram / Discord.'
+description: 'Sends notification about action results to Discord / Telegram.'
 
 inputs:
   result:
     description: 'Just pass here "toJSON(needs)"'
     required: true
+  icon:
+    description: 'URL to icon to show in the message (Discord only).'
+  signature:
+    description: 'Signature of the author of the message (Discord only).'
+  discord-webhook:
+    description: 'Discord: Webhook URL.'
   # telegram-bot-token:
   #   description: 'Telegram: Bot token.'
   # telegram-chat-id:
   #   description: 'Telegram: Chat ID to send message to.'
-  discord-webhook:
-    description: 'Discord: Webhook URL.'
 
 runs:
   using: "composite"
