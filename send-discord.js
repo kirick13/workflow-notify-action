@@ -1,6 +1,6 @@
 const {
 	'INPUT_DISCORD-WEBHOOK': webhook,
-	'INPUT_RESULT': input,
+	'DATA': input,
 	'INPUT_ICON': icon_url,
 	'INPUT_SIGNATURE': signature,
 } = process.env;
@@ -58,6 +58,7 @@ if (
 		},
 	);
 
+	console.log(response.status, response.statusText);
 	console.log(
 		[ ...response.headers.entries() ]
 			.map(([ k, v ]) => k + ': ' + v)
