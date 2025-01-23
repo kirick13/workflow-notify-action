@@ -3,7 +3,7 @@ import { appendFile } from 'node:fs/promises';
 const results = new Set();
 let job_failed;
 
-for (const [ job, { result }] of JSON.parse(process.env.INPUT_RESULT)) {
+for (const [ job, { result }] of Object.entries(JSON.parse(process.env.INPUT_RESULT))) {
 	results.add(result);
 
 	if (result === 'failure' && typeof job_failed !== 'string') {
