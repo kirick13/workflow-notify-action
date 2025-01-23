@@ -25,6 +25,9 @@ runs:
       run: bun run $GITHUB_ACTION_PATH/parse.js
       id: data
 
+    - shell: bash
+      run: echo "${{ steps.data.outputs.value }}"
+
     # - name: Notify Telegram
     #   shell: bash
     #   run: bun run $GITHUB_ACTION_PATH/send-telegram.js
