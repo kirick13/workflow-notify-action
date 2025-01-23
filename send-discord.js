@@ -1,5 +1,3 @@
-console.log(process.env);
-
 const {
 	'INPUT_DISCORD-WEBHOOK': webhook,
 	'DATA': input,
@@ -36,11 +34,6 @@ if (
 
 	if (status === 1) { // failed
 		embed.description = `Job \`${job_failed}\` failed.`;
-		// embed.fields = [{
-		// 	name: 'Failed job',
-		// 	value: `\u0060\u0060\u0060${job_failed}\u00a0\u00a0\u00a0\u0060\u0060\u0060`,
-		// 	inline: true,
-		// }];
 	}
 
 	if (typeof signature === 'string') {
@@ -55,8 +48,8 @@ if (
 		],
 	};
 
-	console.log(JSON.stringify(body, null, 4));
-	console.log();
+	// console.log(JSON.stringify(body, null, 4));
+	// console.log();
 
 	const response = await fetch(
 		webhook,
@@ -69,14 +62,14 @@ if (
 		},
 	);
 
-	console.log(response.status, response.statusText);
-	console.log(
-		[ ...response.headers.entries() ]
-			.map(([ k, v ]) => k + ': ' + v)
-			.join('\n'),
-	);
-	console.log();
-	console.log(
-		await response.text(),
-	);
+	// console.log(response.status, response.statusText);
+	// console.log(
+	// 	[ ...response.headers.entries() ]
+	// 		.map(([ k, v ]) => k + ': ' + v)
+	// 		.join('\n'),
+	// );
+	// console.log();
+	// console.log(
+	// 	await response.text(),
+	// );
 }
