@@ -35,11 +35,12 @@ if (
 	};
 
 	if (status === 1) { // failed
-		embed.fields = [{
-			name: 'Failed job',
-			value: `\u0060\u0060\u0060${job_failed}\u00a0\u00a0\u00a0\u0060\u0060\u0060`,
-			inline: true,
-		}];
+		embed.description = `Job \`${job_failed}\` failed.`;
+		// embed.fields = [{
+		// 	name: 'Failed job',
+		// 	value: `\u0060\u0060\u0060${job_failed}\u00a0\u00a0\u00a0\u0060\u0060\u0060`,
+		// 	inline: true,
+		// }];
 	}
 
 	if (typeof signature === 'string') {
