@@ -8,9 +8,9 @@ const {
 const { repo_name, status, job_failed } = JSON.parse(input);
 
 const TITLES = [
-	'✅ Workflow succeeded!', // succeeded
-	`❌ Workflow failed`, // failed
-	'🗿 Workflow skipped', // skipped
+	`✅ Workflow of <b>${repo_name}</b> succeeded!`, // succeeded
+	`❌ Workflow of <b>${repo_name}</b> failed`, // failed
+	`🗿 Workflow of <b>${repo_name}</b> skipped`, // skipped
 ];
 
 
@@ -27,8 +27,8 @@ if (signature) {
 	text_lines.push(`<i>${signature}</i>`);
 }
 
-console.log(text_lines.join('\n'));
-console.log();
+// console.log(text_lines.join('\n'));
+// console.log();
 
 const response = await fetch(
 	`https://api.telegram.org/bot${bot_token}/sendMessage`,
@@ -45,13 +45,13 @@ const response = await fetch(
 	},
 );
 
-console.log(response.status, response.statusText);
-console.log(
-	[ ...response.headers.entries() ]
-		.map(([ k, v ]) => k + ': ' + v)
-		.join('\n'),
-);
-console.log();
-console.log(
-	await response.text(),
-);
+// console.log(response.status, response.statusText);
+// console.log(
+// 	[ ...response.headers.entries() ]
+// 		.map(([ k, v ]) => k + ': ' + v)
+// 		.join('\n'),
+// );
+// console.log();
+// console.log(
+// 	await response.text(),
+// );
