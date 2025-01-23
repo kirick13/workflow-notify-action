@@ -35,7 +35,7 @@ runs:
     #     TELEGRAM_BOT_TOKEN: ${{ inputs.telegram-bot-token }}
 
     - name: Notify Discord
-      if: ${{ inputs.discord-webhook != '' }}
+      if: ${{ steps.data.outputs.value != '' && inputs.discord-webhook != '' }}
       shell: bash
       run: bun run $GITHUB_ACTION_PATH/send-discord.js
       env:
