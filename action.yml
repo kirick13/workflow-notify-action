@@ -3,7 +3,7 @@ description: 'Sends notification about action results to Telegram / Discord.'
 
 inputs:
   result:
-    description: 'Job names with their result.'
+    description: 'Just pass here ${{ toJSON(needs) }}'
     required: true
   # telegram-bot-token:
   #   description: 'Telegram: Bot token.'
@@ -25,9 +25,6 @@ runs:
       run: bun run $GITHUB_ACTION_PATH/parse.js
       id: data
 
-    - shell: bash
-      run: echo "${{ steps.data.outputs.value }}"
-
     # - name: Notify Telegram
     #   shell: bash
     #   run: bun run $GITHUB_ACTION_PATH/send-telegram.js
@@ -37,12 +34,11 @@ runs:
     #     TELEGRAM_CHAT_ID: ${{ inputs.telegram-chat-id }}
     #     TELEGRAM_BOT_TOKEN: ${{ inputs.telegram-bot-token }}
 
-    # - name: Notify Discord
-    #   shell: bash
-    #   run: bun run $GITHUB_ACTION_PATH/send-discord.js
-    #   env:
-    #     DATA: ${{ steps.data.outputs.value }}
-    #     REPO_DESCRIPTION: ${{ inputs.repo-description }}
-    #     SIGNATURE: ${{ inputs.signature }}
-    #     DISCORD_CHAT_ID: ${{ inputs.discord-chat-id }}
-    #     DISCORD_BOT_TOKEN: ${{ inputs.discord-bot-token }}
+    - name: Notify Discord
+      if: ${{ inputs.discord-webhook != '' }}
+      shell: bash
+      run: bun run $GITHUB_ACTION_PATH/send-discord.js
+      env:
+        DATA: ${{ steps.data.outputs.value }}
+        # REPO_DESCRIPTION: ${{ inputs.repo-description }}
+        # SIGNATURE: ${{ inputs.signature }}
