@@ -22,8 +22,6 @@ runs:
 
     - name: Parse result
       shell: bash
-      env:
-        INPUT_RESULT: ${{ inputs.result }}
       run: bun run $GITHUB_ACTION_PATH/parse.js
       id: data
 
