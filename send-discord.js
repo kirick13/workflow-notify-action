@@ -1,3 +1,5 @@
+console.log(process.env);
+
 const {
 	'INPUT_DISCORD-WEBHOOK': webhook,
 	'DATA': input,
@@ -18,7 +20,7 @@ if (
 	];
 	const TITLES = [
 		'✅ Workflow succeeded!', // succeeded
-		`❌ Job ${job_failed} failed`, // failed
+		`❌ Job \`${job_failed}\` failed`, // failed
 		'🗿 Workflow skipped', // skipped
 	];
 	
