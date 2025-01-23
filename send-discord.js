@@ -32,7 +32,7 @@ if (
 		timestamp: new Date().toISOString(),
 	};
 
-	if (typeofsignature === 'string') {
+	if (typeof signature === 'string') {
 		embed.footer = {
 			text: signature,
 		};
