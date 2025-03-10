@@ -3,7 +3,6 @@ import { appendFile } from 'node:fs/promises';
 const {
 	'INPUT_IGNORE-SKIPPED': ignore_skipped,
 } = process.env;
-console.log('ignore_skipped', ignore_skipped);
 
 const repo_name = process.env.GITHUB_REPOSITORY.match(/^https?:/) && process.env.GITHUB_REPOSITORY.endsWith('.git')
 	? new URL(process.env.GITHUB_REPOSITORY).pathname.replace(/^\//, '').replace(/\.git$/, '')
