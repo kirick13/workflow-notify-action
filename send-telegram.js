@@ -22,10 +22,10 @@ if (status === 1) {
 	text_lines.push(`Job \`${job_failed}\` failed.`);
 }
 
-if (signature) {
-	text_lines.push('');
-	text_lines.push(`<i>${signature}</i>`);
-}
+// if (signature) {
+// 	text_lines.push('');
+// 	text_lines.push(`<i>${signature}</i>`);
+// }
 
 // console.log(text_lines.join('\n'));
 // console.log();
