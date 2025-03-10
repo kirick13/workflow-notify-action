@@ -5,6 +5,8 @@ inputs:
   result:
     description: 'Just pass here "toJSON(needs)"'
     required: true
+  ignore-skipped:
+    description: 'By default, action does not send notifications if workflow is skipped. If set to false, action will send a notification even if workflow was skipped.'
   icon:
     description: 'URL to icon to show in the message (Discord only).'
   signature:
