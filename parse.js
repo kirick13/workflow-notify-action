@@ -1,5 +1,10 @@
 import { appendFile } from 'node:fs/promises';
 
+const {
+	'INPUT_IGNORE-SKIPPED': ignore_skipped,
+} = process.env;
+console.log('ignore_skipped', ignore_skipped);
+
 const repo_name = process.env.GITHUB_REPOSITORY.match(/^https?:/) && process.env.GITHUB_REPOSITORY.endsWith('.git')
 	? new URL(process.env.GITHUB_REPOSITORY).pathname.replace(/^\//, '').replace(/\.git$/, '')
 	: process.env.GITHUB_REPOSITORY;
@@ -26,7 +31,9 @@ if (results.size > 0) {
 		status = 1;
 	}
 	else if (results.has('skipped') && results.size === 1) {
-		status = 2;
+		if (ignore_skipped === false) {
+			status = 2;
+		}
 	}
 	else if (results.has('success')) {
 		status = 0;
@@ -36,12 +43,14 @@ if (results.size > 0) {
 		console.error('results', results);
 		throw new Error('Unknown state found.');
 	}
-	
-	output = JSON.stringify({
-		repo_name,
-		status,
-		job_failed,
-	});
+
+	if (typeof status === 'number') {
+		output = JSON.stringify({
+			repo_name,
+			status,
+			job_failed,
+		});
+	}
 }
 
 await appendFile(
