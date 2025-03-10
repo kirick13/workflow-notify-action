@@ -31,7 +31,7 @@ if (results.size > 0) {
 		status = 1;
 	}
 	else if (results.has('skipped') && results.size === 1) {
-		if (ignore_skipped === false) {
+		if (ignore_skipped === 'false') {
 			status = 2;
 		}
 	}
